@@ -1,0 +1,45 @@
+<div class="menu-modal cover-modal header-footer-group" data-modal-target-string=".menu-modal">
+	<div class="menu-modal-inner modal-inner">
+		<div class="menu-wrapper section-inner">
+			<div class="menu-top">
+				<button
+					class="toggle close-nav-toggle fill-children-current-color"
+					data-toggle-target=".menu-modal"
+					data-toggle-body-class="showing-menu-modal"
+					aria-expanded="false"
+					data-set-focus=".menu-modal"
+				>
+					<span class="toggle-text">{{ __( 'Close Menu', 'twentytwenty' ) }}</span>
+					{{ twentytwenty_the_theme_svg( 'cross' ) }}
+				</button><!-- .nav-toggle -->
+
+
+				{% if function('has_nav_menu', 'expanded') %}
+					<nav class="expanded-menu" aria-label="{{ __( 'Expanded', 'twentytwenty' ) }}" role="navigation">
+						<ul class="modal-menu reset-list-style">
+
+						</ul>
+					</nav>
+				{% endif %}
+
+				{% if 'expanded' != mobile_menu_location %}
+					<nav class="mobile-menu" aria-label="{{ __( 'Mobile', 'twentytwenty' ) }}" role="navigation">
+						<ul class="modal-menu reset-list-style">
+
+						</ul>
+					</nav>
+				{% endif %}
+			</div><!-- .menu-top -->
+
+			<div class="menu-bottom">
+				{% if function('has_nav_menu', 'social') %}
+					<nav aria-label="{{ __( 'Expanded Social links', 'twentytwenty' ) }}" role="navigation">
+						<ul class="social-menu reset-list-style social-icons fill-children-current-color">
+
+						</ul>
+					</nav><!-- .social-menu -->
+				{% endif %}
+			</div><!-- .menu-bottom -->
+		</div><!-- .menu-wrapper -->
+	</div><!-- .menu-modal-inner -->
+</div><!-- .menu-modal -->

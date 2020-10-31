@@ -1,0 +1,19 @@
+{% if function('get_the_author_meta', 'description') and function('get_theme_mod', 'show_author_bio', true) %}
+	<div class="author-bio">
+		<div class="author-title-wrapper">
+			<div class="author-avatar vcard">
+				{{ function('get_avatar', post.author.id, 160 ) }}
+			</div>
+			<h2 class="author-title heading-size-4">
+				{{ function('get_the_author') | e('esc_html') | format(__( 'By %s', 'twentytwenty' ))
+				}}
+			</h2>
+		</div><!-- .author-name -->
+		<div class="author-description">
+			{{ function('get_the_author_meta', 'description' ) | wpautop | e('wp_kses_post') }}
+			<a class="author-link" href="{{ post.author.link }}" rel="author">
+				{{ __( 'View Archive <span aria-hidden="true">&rarr;</span>', 'twentytwenty' ) }}
+			</a>
+		</div><!-- .author-description -->
+	</div><!-- .author-bio -->
+{% endif %}

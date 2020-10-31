@@ -1,0 +1,39 @@
+{% set next_post = post.next %}
+{% set prev_post = post.prev %}
+
+{% if next_post or prev_post %}
+
+	{% set pagination_classes = '' %}
+
+	{% if not next_post %}
+		{% set pagination_classes = ' only-one only-prev' %}
+	{% elseif not prev_post %}
+		{% set pagination_classes = ' only-one only-next' %}
+	{% endif %}
+
+	<nav class="pagination-single section-inner{{ pagination_classes }}" aria-label="{{ __( 'Post', 'twentytwenty' ) }}" role="navigation">
+
+		<hr class="styled-separator is-style-wide" aria-hidden="true" />
+
+		<div class="pagination-single-inner">
+			{% if prev_post %}
+				<a class="previous-post" href="{{ prev_post.link }}">
+					<span class="arrow" aria-hidden="true">&larr;</span>
+					<span class="title"><span class="title-inner">{{prev_post.title}}</span></span>
+				</a>
+			{% endif %}
+
+			{% if next_post %}
+				<a class="next-post" href="{{ next_post.link }}">
+					<span class="arrow" aria-hidden="true">&rarr;</span>
+					<span class="title"><span class="title-inner">{{next_post.title}}</span></span>
+				</a>
+			{% endif %}
+
+		</div><!-- .pagination-single-inner -->
+
+		<hr class="styled-separator is-style-wide" aria-hidden="true" />
+
+	</nav><!-- .pagination-single -->
+
+{% endif %}

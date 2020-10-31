@@ -1,0 +1,9 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	{% if posts > 0 %}
+		{% for post in posts %}
+			{% include ['partial/content-'~post.post_type~'.twig', 'partial/content.twig'] %}
+		{% endfor %}
+	{% endif %}
+{% endblock %}

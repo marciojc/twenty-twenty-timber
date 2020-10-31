@@ -1,0 +1,17 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<div class="section-inner thin error404-content">
+
+		<h1 class="entry-title">
+			{{ __( 'Page Not Found', 'twentytwenty' ) }}
+		</h1>
+
+		<div class="intro-text">
+			<p>{{ __( 'The page you were looking for could not be found. It might have been removed, renamed, or did not exist in the first place.', 'twentytwenty' ) }}</p>
+		</div>
+
+		{{ function('get_search_form', {label: __( '404 not found', 'twentytwenty' )}) }}
+
+	</div><!-- .section-inner -->
+{% endblock %}

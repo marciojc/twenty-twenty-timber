@@ -1,0 +1,63 @@
+{% if has_footer_menu or has_social_menu or has_sidebar_1 or has_sidebar_2 %}
+	<div class="footer-nav-widgets-wrapper header-footer-group">
+		<div class="footer-inner section-inner">
+			{% if has_footer_menu or has_social_menu %}
+				<div class="footer-top{{footer_top_classes}}">
+					{% if has_footer_menu %}
+						<nav aria-label="{{ __( 'Footer', 'twentytwenty' ) }}" role="navigation" class="footer-menu-wrapper">
+							<ul class="footer-menu reset-list-style">
+								{{ function('wp_nav_menu', {
+									'container'      : '',
+									'depth'          : '1',
+									'items_wrap'     : '%3$s',
+									'theme_location' : 'footer'
+								}) }}
+							</ul>
+						</nav><!-- .site-nav -->
+					{% endif %}
+
+					{% if has_social_menu %}
+						<nav aria-label="{{ __( 'Social links', 'twentytwenty' ) }}" class="footer-social-wrapper">
+							<ul class="social-menu footer-social reset-list-style social-icons fill-children-current-color">
+								{{ function('wp_nav_menu', {
+									'theme_location'  : 'social',
+									'container'       : '',
+									'container_class' : '',
+									'items_wrap'      : '%3$s',
+									'menu_id'         : '',
+									'menu_class'      : '',
+									'depth'           : 1,
+									'link_before'     : '<span class="screen-reader-text">',
+									'link_after'      : '</span>',
+									'fallback_cb'     : ''
+								}) }}
+							</ul><!-- .footer-social -->
+						</nav><!-- .footer-social-wrapper -->
+					{% endif %}
+
+					</div><!-- .footer-top -->
+			{% endif %}
+
+			{% if has_sidebar_1 or has_sidebar_2 %}
+				<aside class="footer-widgets-outer-wrapper" role="complementary">
+					<div class="footer-widgets-wrapper">
+
+						{% if has_sidebar_1 %}
+							<div class="footer-widgets column-one grid-item">
+								{{ sidebar_1 }}
+							</div>
+						{% endif %}
+
+						{% if has_sidebar_2 %}
+							<div class="footer-widgets column-two grid-item">
+								{{ sidebar_2 }}
+							</div>
+						{% endif %}
+
+					</div><!-- .footer-widgets-wrapper -->
+				</aside><!-- .footer-widgets-outer-wrapper -->
+			{% endif %}
+
+		</div><!-- .footer-inner -->
+	</div><!-- .footer-nav-widgets-wrapper -->
+{% endif %}

@@ -1,0 +1,5 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	{% include ['partial/content-'~post.post_type~'.twig', 'partial/content.twig'] %}
+{% endblock %}

@@ -1,0 +1,50 @@
+<article class="{{post.post_type}}" id="post-{{post.ID}}">
+	{% include "partial/entry-header.twig" %}
+
+	{% if not function('is_search') %}
+		{% include "partial/featured-image.twig" %}
+	{% endif %}
+
+	<div class="post-inner {{ function('is_page_template', 'templates/template-full-width.php') ? '' : 'thin' }} ">
+		<div class="entry-content">
+			{% if function('is_search') or not function('is_singular') and 'summary' == function('get_theme_mod', 'blog_content', 'full') %}
+				<p>{{ post.preview.read_more(false).end('') }}</p>
+			{% else %}
+				{{ post.content }}
+			{% endif %}
+
+		</div><!-- .entry-content -->
+	</div><!-- .post-inner -->
+
+	<div class="section-inner">
+		{{ function('wp_link_pages', {
+		    'before'      : '<nav class="post-nav-links bg-light-background" aria-label="' ~ __( 'Page', 'twentytwenty' ) ~ '"><span class="label">' ~ __( 'Pages:', 'twentynineteen' ) ~ '</span>',
+		    'after'       : '</nav>',
+		    'link_before' : '<span class="page-number">',
+		    'link_after'  : '</span>',
+		   }, post.id)
+		}}
+
+		{{ function('edit_post_link') }}
+
+		{{ function('twentytwenty_the_post_meta', post.id, 'single-bottom') }}
+
+		{% if function('is_single') %}
+			{% include 'partial/entry-author-bio.twig' %}
+		{% endif %}
+
+	</div><!-- .section-inner -->
+
+	{% if function('post_type_supports', post.post_type, 'author') and function('is_single') %}
+		{% include "partial/navigation.twig" %}
+	{% endif %}
+
+
+	{% if (function('is_single') or function('is_page')) and (function('comments_open') or function('get_comments_number')) and (not function('post_password_required')) %}
+		<div class="comments-wrapper section-inner">
+			{{ function('comments_template') }}
+		</div>
+	{% endif %}
+
+
+</article><!-- .post -->

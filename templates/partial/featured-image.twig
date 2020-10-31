@@ -1,0 +1,23 @@
+{% if function('has_post_thumbnail') and not function('post_password_required') %}
+	{% set featured_media_inner_classes = '' %}
+
+	{% if not function('is_singular') %}
+		{% set featured_media_inner_classes = ' medium' %}
+	{% endif %}
+
+
+	<figure class="featured-media">
+		<div class="featured-media-inner section-inner{{featured_media_inner_classes}}">
+
+			<img src="{{post.thumbnail.src}}" />
+
+			{% set caption = function('get_the_post_thumbnail_caption') %}
+
+			{% if caption %}
+				<figcaption class="wp-caption-text">
+					{{ caption|e('wp_kses_post') }}
+				</figcaption>
+			{% endif %}
+		</div><!-- .featured-media-inner -->
+	</figure><!-- .featured-media -->
+{% endif %}

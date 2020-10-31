@@ -1,0 +1,41 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	{% set archive_title = '' %}
+
+	{% if function('is_archive') and not posts > 0 %}
+		{% set archive_title = __( 'Nothing Found', 'twentytwenty' ) %}
+	{% elseif not function('is_home') %}
+		{% set archive_title = function('get_the_archive_title') %}
+		{% set archive_subtitle = function('get_the_archive_description') %}
+	{% endif %}
+
+	{% if archive_title or archive_subtitle %}
+		<header class="archive-header has-text-align-center header-footer-group">
+			<div class="archive-header-inner section-inner medium">
+				{% if archive_title %}
+					<h1 class="archive-title">{{ archive_title|e('wp_kses_post') }}</h1>
+				{% endif %}
+
+				{% if archive_subtitle %}
+					<div class="archive-subtitle section-inner thin max-percentage intro-text">{{ archive_subtitle|wpautop|e('wp_kses_post') }}</div>
+				{% endif %}
+			</div><!-- .archive-header-inner -->
+		</header><!-- .archive-header -->
+	{% endif %}
+
+	{% if posts > 0 %}
+		{% for post in posts %}
+			{% if not loop.first %}
+				<hr class="post-separator styled-separator is-style-wide section-inner" aria-hidden="true" />
+			{% endif %}
+			{% include ['partial/content-'~post.post_type~'.twig', 'partial/content.twig'] %}
+		{% endfor %}
+	{% elseif function('is_search') %}
+		<div class="no-search-results-form section-inner thin">
+
+		</div><!-- .no-search-results -->
+	{% endif %}
+
+	{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+{% endblock %}
